@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Expense Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>📅 Monthly Expense Summary</h2>
+
+    <!-- Month Selection Form -->
+    <form method="POST">
+        <input type="month" name="month" required>
+        <button type="submit">Calculate Total</button>
+    </form>
+
+    <!-- Result Display -->
+    {% if total is not none %}
+        <div style="
+            margin-top:20px;
+            padding:15px;
+            background:#f1f5ff;
+            border-radius:8px;
+            text-align:center;
+        ">
+            <h3>
+                Total Expense for <span style="color:#1e3c72;">{{ month }}</span>
+            </h3>
+            <h2 style="color:#2a5298;">
+                ₹ {{ total }}
+            </h2>
+        </div>
+    {% endif %}
+
+    <!-- Navigation Buttons -->
+    <div style="margin-top:25px; text-align:center;">
+        <a href="/" style="margin-right:10px;">🏠 Home</a>
+        <a href="/graph" style="margin-right:10px;">📊 View Graph</a>
+        <a href="/add">➕ Add Expense</a>
+    </div>
+</div>
+
+</body>
+</html>

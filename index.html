@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- TOAST MESSAGE -->
+{% if expense_added %}
+<div id="toast">✅ Expense Added Successfully</div>
+{% endif %}
+
+<div class="container">
+<h2>💰 Expense Tracker</h2>
+
+<div class="top-links">
+<a href="/graph">📊 Graph</a>
+</div>
+
+<form method="POST" class="expense-form">
+<input type="number" name="amount" placeholder="Amount" required>
+<input type="text" name="category" placeholder="Category" required>
+<input type="date" name="date" required>
+<button>Add Expense</button>
+</form>
+
+<table>
+<tr>
+<th>ID</th><th>Amount</th><th>Category</th><th>Date</th><th>Action</th>
+</tr>
+
+{% for e in expenses %}
+<tr>
+<td>{{ e[0] }}</td>
+<td>₹{{ e[1] }}</td>
+<td>{{ e[2] }}</td>
+<td>{{ e[3] }}</td>
+<td>
+<a href="/delete/{{ e[0] }}"
+   class="delete-btn"
+   onclick="return confirm('Delete this expense?')">
+   🗑 Delete
+</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<!-- TOAST AUTO HIDE -->
+<script>
+    setTimeout(() => {
+        const toast = document.getElementById('toast');
+        if (toast) {
+            toast.classList.add('hide');
+        }
+    }, 2500);
+</script>
+
+</body>
+</html>
+
+
+
+
+
